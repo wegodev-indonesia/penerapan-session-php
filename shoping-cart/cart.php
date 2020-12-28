@@ -1,6 +1,6 @@
 <?php
     session_start();
-
+	
     include('connection.php');
 
     $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : []; 
@@ -27,12 +27,13 @@
                         <th class="text-center">Qty</th>
                         <th class="text-right">Total</th>
                     </tr>
-                    <?php
+					
+                    <?php 
                         $grandTotal = 0;
                         foreach($cart AS $row): 
                             $pdo                = $db->prepare('SELECT * FROM product WHERE id=:product_id');
                             $data['product_id'] = $row['id'];
-                                                $pdo->execute($data);
+                                                  $pdo->execute($data);
                             $product            = $pdo->fetch(PDO::FETCH_ASSOC);
 
                             $total = $product['price'] * $row['quantity'];
